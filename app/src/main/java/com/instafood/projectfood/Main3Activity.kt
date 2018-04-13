@@ -9,4 +9,8 @@ class Main3Activity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main3)
     }
+
+
+
+
 }
