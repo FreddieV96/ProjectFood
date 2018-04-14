@@ -13,6 +13,7 @@ import com.instafood.projectfood.adapter.imageAdapter
 import com.instafood.projectfood.models.Recipe
 import com.instafood.projectfood.models.SelectIngredient
 import com.instafood.projectfood.models.firebaseConnector
+import java.util.*
 
 class recipes : AppCompatActivity() {
 
@@ -28,7 +29,7 @@ class recipes : AppCompatActivity() {
 
         val s = intent.getStringExtra("1")
         Toast.makeText(applicationContext, s, Toast.LENGTH_LONG).show()
-        
+
 
         /*val ingredients = intent.getStringArrayListExtra("ingredients").fold(emptyList<SelectIngredient>()) { acc, s ->
             acc + SelectIngredient(s)
@@ -38,6 +39,11 @@ class recipes : AppCompatActivity() {
 
         val recipeList : MutableList<Recipe> = mutableListOf()
 
+        val ing1 = SelectIngredient("iceberg salat");
+        val ing2 = SelectIngredient("agurk");
+        val ing3 = SelectIngredient("tomater");
+        val ing4 = SelectIngredient("Thousand island")
+
         val listView = findViewById<ListView>(R.id.listview1)
         val adapter = imageAdapter(this, recipeList)
         listView.adapter = adapter
@@ -45,6 +51,6 @@ class recipes : AppCompatActivity() {
         fbConnector.getRecipes({}, {
             recipeList.add(it)
             adapter?.notifyDataSetChanged()
-        }, null)
+        }, Arrays.asList(ing1, ing2, ing3 ,ing4))
     }
 }

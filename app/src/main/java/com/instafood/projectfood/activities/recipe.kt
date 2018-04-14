@@ -26,7 +26,7 @@ class recipe : AppCompatActivity() {
         val stepView = findViewById<EditText>(R.id.editText2)
 
         var fbConnecter = firebaseConnector()
-        val id = 2
+        val title = "boller i karry"
         /*fbConnecter.getRecipes({
             var rec = it.get(id)
             titleView.setText(rec.title)
@@ -36,7 +36,7 @@ class recipe : AppCompatActivity() {
             stepView.setText(rec.tutorial)
         }, {
             imageView.setImageBitmap(it)
-        }, null)*/
+    }, null)*/
 
         }
     }
