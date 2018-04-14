@@ -4,12 +4,15 @@ import android.view.ViewGroup
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
+import android.os.Bundle
+import android.os.Parcelable
 import android.support.v4.content.ContextCompat.startActivity
 import android.view.View
 import android.widget.BaseAdapter
 import android.widget.Button
 import android.widget.ImageView
 import com.instafood.projectfood.R
+import com.instafood.projectfood.activities.Main3Activity
 import com.instafood.projectfood.activities.recipe
 import com.instafood.projectfood.activities.recipes
 import com.instafood.projectfood.models.Recipe
@@ -24,10 +27,15 @@ class imageAdapter(private val context: Activity, private val recipeList : List<
         if (recipeList[id].pictureBM != null) {
             imageView.setImageBitmap(recipeList[id].pictureBM)
         }
+        button.setText(recipeList[id].title);
+
         button.setOnClickListener {
-            val intent = Intent(this.context, recipe::class.java)
-            intent.putExtra("rec", recipeList[id])
-            startActivity(this.context, intent,null)
+            val intent = Intent(context, recipe::class.java)
+            intent.putExtra("rec", recipeList[id] as Parcelable)
+            /*var bundle = Bundle()
+            bundle.putParcelable("rec",recipeList[id]);
+            intent.putExtra("recBundle", bundle)*/
+            context.startActivity(intent)
         }
 
         return rowView
