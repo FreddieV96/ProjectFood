@@ -1,5 +1,6 @@
 package com.instafood.projectfood
 
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -15,10 +16,9 @@ import com.google.firebase.storage.StorageReference
 import com.instafood.projectfood.models.Ingredient
 import com.instafood.projectfood.models.Recipe
 import java.io.File
-import com.instafood.projectfood.R.id.imageView
 import com.bumptech.glide.Glide
 import com.instafood.projectfood.R.id.image
-
+import com.instafood.projectfood.adapter.imageAdapter
 
 class Main3Activity : AppCompatActivity() {
 
@@ -32,28 +32,28 @@ class Main3Activity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main3)
 
-        val button = findViewById<Button>(R.id.button2);
-        val textField = findViewById<TextView>(R.id.textView3);
-        val imageView = findViewById<ImageView>(R.id.imageView);
+        val imageBitmaps : MutableList<Bitmap> = mutableListOf()
 
-        textField.movementMethod = ScrollingMovementMethod()
-
+        val listView = findViewById<ListView>(R.id.listview1)
+        val adapter = imageAdapter(this, imageBitmaps)
+        listView.adapter = adapter
         collection
                 .get()
                 .addOnCompleteListener({
-                    if(it.isSuccessful()) {
-                        for(document in it.result.documents) {
+                    if (it.isSuccessful()) {
+                        for (document in it.result.documents) {
+
                             var rec = document.toObject(Recipe::class.java)
-                            if(rec != null) {
+                            if (rec != null) {
                                 rec.pictureRef = document.get("picture") as? DocumentReference;
-                                if(rec.pictureRef != null) {
+                                if (rec.pictureRef != null) {
                                     var imgRef = storage.child(rec.pictureRef!!.path)
                                     var localFile = File.createTempFile("images", "jpg")
                                     imgRef.getFile(localFile).addOnSuccessListener {
                                         var bitmap = BitmapFactory.decodeFile(localFile.path)
-                                        imageView.setImageBitmap(bitmap)
+                                        imageBitmaps.add(bitmap)
+                                        adapter?.notifyDataSetChanged()
                                     }.addOnFailureListener({
-                                        textField.text = it.message
                                     })
                                 }
                             }
@@ -61,5 +61,7 @@ class Main3Activity : AppCompatActivity() {
                         }
                     }
                 })
-    }
+
+
+        }
 }
