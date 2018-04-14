@@ -74,6 +74,10 @@ class Main3Activity : AppCompatActivity() {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         val intent = Intent(this@Main3Activity,recipes::class.java);
+        intent.putStringArrayListExtra("ingredients", ArrayList(checkedFood))
+        var b = Bundle()
+        b.putBoolean("isActive", true)
+        intent.putExtras(b)
         startActivity(intent)
 
 
