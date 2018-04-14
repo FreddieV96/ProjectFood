@@ -8,26 +8,30 @@ import android.widget.BaseAdapter
 import android.widget.Button
 import android.widget.ImageView
 import com.instafood.projectfood.R
+import com.instafood.projectfood.models.Recipe
 
-class imageAdapter(private val context: Activity, private val bitMaps: List<Bitmap>)
+class imageAdapter(private val context: Activity, private val recipeList : List<Recipe>)
     : BaseAdapter() {
-    override fun getView(p0: Int, p1: View?, p2: ViewGroup?): View {
+    override fun getView(id: Int, view: View?, viewgroup: ViewGroup?): View {
         val inflater = context.layoutInflater
-        val rowView = inflater.inflate(R.layout.imagelayout,null)
+        val rowView = inflater.inflate(R.layout.imagelayout, null)
         val buttonview = rowView.findViewById<Button>(R.id.button)
         val imageView = rowView.findViewById<ImageView>(R.id.image_item)
-        imageView.setImageBitmap(bitMaps[p0])
+        if (recipeList[id].pictureBM != null) {
+            imageView.setImageBitmap(recipeList[id].pictureBM)
+        }
+        buttonview.setText(recipeList[id].title)
         return rowView
 
     }
 
     override fun getItem(p0: Int): Any {
-        return bitMaps.get(p0)
+        return recipeList.get(p0)
     }
     override fun getItemId(p0: Int): Long {
         return p0.toLong()
     }
     override fun getCount(): Int {
-        return bitMaps.size
+        return recipeList.size
     }
 }

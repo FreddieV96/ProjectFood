@@ -24,7 +24,7 @@ class firebaseConnector {
      * @param callBack A Lambda function that takes a list of recipes and does something with it.
      * @param onPictureLoad A Lambda function that takes the bitmap when a picture is loaded and handles the bitmap accodringly.
      */
-    fun getRecipes(callBack : (List<Recipe>) -> Unit, onPictureLoad : ((Bitmap) -> Unit)?, ingList: List<SelectIngredient>?) {
+    fun getRecipes(callBack : (List<Recipe>) -> Unit, onPictureLoad : ((Recipe) -> Unit)?, ingList: List<SelectIngredient>?) {
         val collection = store.collection("recipes")
         collection.get().addOnCompleteListener {
             if(it.isSuccessful) {
@@ -36,8 +36,9 @@ class firebaseConnector {
                             var localFile = File.createTempFile("images", "jpg")
                             imgRef.getFile(localFile).addOnSuccessListener {
                                 var bitmap = BitmapFactory.decodeFile(localFile.path)
+                                rec.pictureBM = bitmap;
                                 if(onPictureLoad != null) {
-                                    onPictureLoad(bitmap)
+                                    onPictureLoad(rec)
                                 }
                             }.addOnFailureListener({
                             })

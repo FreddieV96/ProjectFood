@@ -8,5 +8,6 @@ data class Recipe(
         val persons: String = "",
         val tutorial: String ="",
         val picturePath : String = "",
+        var pictureBM : Bitmap? = null,
         val ingredients: ArrayList<Ingredient> = ArrayList()
 )

@@ -10,6 +10,7 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.instafood.projectfood.R
 import com.instafood.projectfood.adapter.imageAdapter
+import com.instafood.projectfood.models.Recipe
 import com.instafood.projectfood.models.firebaseConnector
 
 class recipes : AppCompatActivity() {
@@ -26,18 +27,14 @@ class recipes : AppCompatActivity() {
 
         val fbConnector = firebaseConnector()
 
-        val imageBitmaps : MutableList<Bitmap> = mutableListOf()
+        val recipeList : MutableList<Recipe> = mutableListOf()
 
         val listView = findViewById<ListView>(R.id.listview1)
-        val adapter = imageAdapter(this, imageBitmaps)
+        val adapter = imageAdapter(this, recipeList)
         listView.adapter = adapter
 
-        fbConnector.getRecipes({
-            for(rec in it) {
-
-            }
-        }, {
-            imageBitmaps.add(it)
+        fbConnector.getRecipes({}, {
+            recipeList.add(it)
             adapter?.notifyDataSetChanged()
         }, null)
     }
