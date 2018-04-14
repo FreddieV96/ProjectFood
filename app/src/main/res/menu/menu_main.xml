@@ -1,0 +1,16 @@
+
+<menu
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    tools:context="com.instafood.projectfood.Main3Activity">
+
+
+    <item
+        android:id="@+id/action_next"
+        android:title="Next"
+        android:tooltipText="Next"
+        app:showAsAction="always" />
+
+
+</menu>
