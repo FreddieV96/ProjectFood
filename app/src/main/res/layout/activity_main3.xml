@@ -7,55 +7,32 @@
     android:scrollbars="vertical"
     tools:context=".Main3Activity">
 
-    <TableLayout
+
+
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TableRow
+        <RelativeLayout
+            android:id="@+id/rl_layout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent">
 
-            <ToggleButton
-                android:id="@+id/toggleButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checked="true"
-                android:text="ToggleButton"
-                android:textOff="Æg"
-                android:textOn="Æg"
-                android:textStyle="bold" />
+        </RelativeLayout>
 
-            <ToggleButton
-                android:id="@+id/toggleButton3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checked="true"
-                android:text="ToggleButton"
-                android:textOff="Spejepølse"
-                android:textOn="Spejepølse"
-                android:textStyle="bold" />
+    </ScrollView>
 
-            <ToggleButton
-                android:id="@+id/toggleButton2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checked="true"
-                android:text="ToggleButton"
-                android:textOff="Rugbrød"
-                android:textOn="Rugbrød"
-                android:textStyle="bold" />
-        </TableRow>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/sw_layout">
 
-        <TableRow
+        <LinearLayout
+            android:id="@+id/ll_main_layout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:orientation="vertical"></LinearLayout>
+    </ScrollView>
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </TableLayout>
 </android.support.constraint.ConstraintLayout>
