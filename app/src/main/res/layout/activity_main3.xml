@@ -4,6 +4,58 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:scrollbars="vertical"
     tools:context=".Main3Activity">
 
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <ToggleButton
+                android:id="@+id/toggleButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="ToggleButton"
+                android:textOff="Æg"
+                android:textOn="Æg"
+                android:textStyle="bold" />
+
+            <ToggleButton
+                android:id="@+id/toggleButton3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="ToggleButton"
+                android:textOff="Spejepølse"
+                android:textOn="Spejepølse"
+                android:textStyle="bold" />
+
+            <ToggleButton
+                android:id="@+id/toggleButton2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="ToggleButton"
+                android:textOff="Rugbrød"
+                android:textOn="Rugbrød"
+                android:textStyle="bold" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </TableLayout>
 </android.support.constraint.ConstraintLayout>
