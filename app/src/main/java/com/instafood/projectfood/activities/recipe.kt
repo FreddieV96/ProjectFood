@@ -9,6 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.instafood.projectfood.R
 import com.instafood.projectfood.models.Ingredient
+import com.instafood.projectfood.models.Recipe
 import com.instafood.projectfood.models.firebaseConnector
 
 import kotlinx.android.synthetic.main.recipe.*
@@ -20,14 +21,19 @@ class recipe : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.recipe)
 
-        //val id = intent.getIntExtra("rec",0)
+        //val rec = intent.getParcelableExtra<Recipe>("rec")
 
         val imageView = findViewById<ImageView>(R.id.image_item2)
         val titleView = findViewById<Button>(R.id.button2)
         val personView = findViewById<Button>(R.id.button4)
         val IngredientView = findViewById<Button>(R.id.button3)
         val stepView = findViewById<TextView>(R.id.textView2)
-
+/*
+        titleView.setText(rec.title);
+        personView.setText(rec.persons);
+        IngredientView.setText(rec.ingredients.fold(""){ acc, i -> acc + i + "\n"})
+        stepView.setText(rec.tutorial)
+*/
         /*var fbConnecter = firebaseConnector()
         val title = "boller i karry"
         fbConnecter.getRecipes({

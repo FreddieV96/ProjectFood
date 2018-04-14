@@ -26,7 +26,7 @@ class imageAdapter(private val context: Activity, private val recipeList : List<
         }
         button.setOnClickListener {
             val intent = Intent(this.context, recipe::class.java)
-            intent.putExtra("rec", id)
+            intent.putExtra("rec", recipeList[id])
             startActivity(this.context, intent,null)
         }
 
