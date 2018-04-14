@@ -18,6 +18,13 @@
             android:elevation="4dp"
             android:theme="@style/AuHackTheme" />
 
+        <SearchView
+            android:id="@+id/searchView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hapticFeedbackEnabled="false"
+            android:iconifiedByDefault="false"
+            tools:layout_editor_absoluteY="-3dp" />
     </android.support.design.widget.AppBarLayout>
 
     <android.support.v4.widget.NestedScrollView
@@ -27,30 +34,16 @@
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:scrollbars="vertical"
             tools:context=".activities.Main3Activity">
 
 
             <ScrollView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <RelativeLayout
-                    android:id="@+id/rl_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                </RelativeLayout>
-
-            </ScrollView>
-
-            <ScrollView
                 android:id="@+id/sw_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:layout_editor_absoluteX="149dp"
-                tools:layout_editor_absoluteY="26dp">
+                tools:layout_editor_absoluteX="149dp">
 
                 <com.google.android.flexbox.FlexboxLayout xmlns:android="http://schemas.android.com/apk/res/android"
                     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -68,4 +61,5 @@
 
         </android.support.constraint.ConstraintLayout>
     </android.support.v4.widget.NestedScrollView>
+
 </android.support.design.widget.CoordinatorLayout>
