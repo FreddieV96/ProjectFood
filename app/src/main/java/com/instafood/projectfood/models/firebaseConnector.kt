@@ -2,13 +2,16 @@ package com.instafood.projectfood.models
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.util.Log
 import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.CollectionReference
+import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import java.io.File
+import kotlin.math.sin
 
 class firebaseConnector {
     lateinit var store : FirebaseFirestore
@@ -20,63 +23,71 @@ class firebaseConnector {
     }
 
     /**
+     * Get a single recipe from the firestore.
+     * @param id The id to get from the firestore.
+     * @param callBack The callback function to run once the recipe is loaded.
+     */
+    fun getRecipe(id: String, callBack : (Recipe) -> Unit) {
+        val document = store.collection("recipes").document(id)
+        document.get().addOnCompleteListener({
+            if(it.isSuccessful) {
+                fromSnapshotToRecipe(it.result, callBack)
+            }
+        })
+    }
+
+    /**
      * Get all recipes from the firebase collection.
      * @param callBack A Lambda function that takes a list of recipes and does something with it.
      * @param onPictureLoad A Lambda function that takes the bitmap when a picture is loaded and handles the bitmap accodringly.
      */
-    fun getRecipes(callBack : (List<Recipe>) -> Unit, onPictureLoad : ((Recipe) -> Unit)?, ingList: List<SelectIngredient>?) {
+    fun getRecipes(callBack: (Recipe) -> Unit, ingList: List<SelectIngredient> = emptyList()) {
         val collection = store.collection("recipes")
-        collection.get().addOnCompleteListener {
+        collection.get().addOnCompleteListener( {
             if(it.isSuccessful) {
-                val recList = it.result.documents.fold(emptyList<Recipe>()) {acc, r ->
-                    val rec = r.toObject(Recipe::class.java)
-                    if(rec != null) {
-                        if(!rec.picturePath.equals("")) {
-                            var imgRef = storage.child(rec.picturePath)
-                            var localFile = File.createTempFile("images", "jpg")
-                            imgRef.getFile(localFile).addOnSuccessListener {
-                                var bitmap = BitmapFactory.decodeFile(localFile.path)
-                                rec.pictureBM = bitmap;
-                                if(onPictureLoad != null) {
-                                    if(ingList != null) {
-                                        val sIngList = ingList.map { it.name }.toMutableList()
-                                        val sIngredients = rec.ingredients.map { it.title }.toMutableList()
-                                        if(sIngList.containsAll(sIngredients)) {
-                                            onPictureLoad(rec)
-                                        }
-                                    } else {
-                                        onPictureLoad(rec)
-                                    }
-                                }
-                            }.addOnFailureListener({
-                            })
-                        }
-                        acc + rec
-                    } else {
-                        acc
-                    }
-                }
-                if(ingList != null) {
-                    callBack(recList.filter {
-                        var containsAll = true;
-                        for (sIng in ingList) {
-                            if (containsAll) {
-                                var contains = false;
-                                for (ing in it.ingredients) {
-                                    if (ing.title.equals(sIng.name)) {
-                                        contains = true
-                                    }
-                                }
-                                containsAll = contains;
+                it.result.documents.forEach({
+                    if(ingList.isNotEmpty()) {
+                        val recipe = it.toObject(Recipe::class.java)
+                        if(recipe != null) {
+                            val sIngredients = recipe.ingredients.fold(emptyList<String>()) { acc, e ->
+                                acc + e.title
+                            }
+                            val ssIngredients = ingList.fold(emptyList<String>()) { acc,e ->
+                                acc + e.name
+                            }
+                            if(sIngredients.containsAll(ssIngredients)) {
+                                fromSnapshotToRecipe(it, callBack)
                             }
                         }
-                        containsAll
-                    })
+                    } else {
+                        fromSnapshotToRecipe(it, callBack)
+                    }
+                })
+            }
+        })
+    }
+
+    /**
+     * Converts DocumentSnapshot to a recipe and calls a function on the recipe.
+     * @param it The snapshot to convert from.
+     * @param callBack The callback to run on the recipe.
+     */
+    fun fromSnapshotToRecipe(it: DocumentSnapshot, callBack : (Recipe) -> Unit) {
+            val rec = it.toObject(Recipe::class.java)
+            if(rec != null) {
+                rec.id = it.id
+                if(!rec.picturePath.equals("")) {
+                    val imgRef = storage.child(rec.picturePath)
+                    val localFile = File.createTempFile("images", "jpg")
+                    imgRef.getFile(localFile).addOnSuccessListener {
+                        var bitmap = BitmapFactory.decodeFile(localFile.path)
+                        rec.pictureBM = bitmap;
+                        callBack(rec)
+                    }
                 } else {
-                    callBack(recList);
+                    callBack(rec)
                 }
             }
-        }
     }
 
     /**

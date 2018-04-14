@@ -31,10 +31,7 @@ class imageAdapter(private val context: Activity, private val recipeList : List<
 
         button.setOnClickListener {
             val intent = Intent(context, recipe::class.java)
-            intent.putExtra("rec", recipeList[id] as Parcelable)
-            /*var bundle = Bundle()
-            bundle.putParcelable("rec",recipeList[id]);
-            intent.putExtra("recBundle", bundle)*/
+            intent.putExtra("recipeID", recipeList[id].id)
             context.startActivity(intent)
         }
 

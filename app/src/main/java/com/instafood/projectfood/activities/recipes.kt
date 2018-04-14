@@ -31,8 +31,6 @@ class recipes : AppCompatActivity() {
             acc + SelectIngredient(s)
         }
 
-        Toast.makeText(applicationContext, ingredients.toString(), Toast.LENGTH_SHORT).show()
-
         val fbConnector = firebaseConnector()
 
         val recipeList : MutableList<Recipe> = mutableListOf()
@@ -41,9 +39,10 @@ class recipes : AppCompatActivity() {
         val adapter = imageAdapter(this, recipeList)
         listView.adapter = adapter
 
-        fbConnector.getRecipes({}, {
+        fbConnector.getRecipes({
             recipeList.add(it)
             adapter?.notifyDataSetChanged()
         }, ingredients)
+
     }
 }

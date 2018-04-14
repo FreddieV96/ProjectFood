@@ -18,31 +18,22 @@ class recipe : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.recipe)
 
-        //val bundle = intent.getBundleExtra("recBundle");
+        val fbConnector = firebaseConnector()
+
+        val recipeID = intent.getStringExtra("recipeID")
 
         val imageView = findViewById<ImageView>(R.id.image_item2)
         val titleView = findViewById<Button>(R.id.button2)
         val personView = findViewById<Button>(R.id.button4)
         val IngredientView = findViewById<Button>(R.id.button3)
         val stepView = findViewById<TextView>(R.id.textView2)
-/*
-        titleView.setText(rec.title);
-        personView.setText(rec.persons);
-        IngredientView.setText(rec.ingredients.fold(""){ acc, i -> acc + i + "\n"})
-        stepView.setText(rec.tutorial)
-*/
-        /*var fbConnecter = firebaseConnector()
-        val title = "boller i karry"
-        fbConnecter.getRecipes({
-            var rec = it.get(id)
-            titleView.setText(rec.title)
-            var number = rec.persons.toString()
-            personView.setText("Denne ret er til " + number + "personer.")
-            IngredientView.setText("Du skal bruge: \n" + rec.ingredients)
-            stepView.setText(rec.tutorial)
-        }, {
-            imageView.setImageBitmap(it)
-    }, null)*/
 
+        fbConnector.getRecipe(recipeID, {
+            titleView.setText(it.title);
+            personView.setText(it.persons);
+            IngredientView.setText(it.ingredients.fold(""){ acc, i -> acc + i + "\n"})
+            stepView.setText(it.tutorial)
+            imageView.setImageBitmap(it.pictureBM)
+        })
         }
     }

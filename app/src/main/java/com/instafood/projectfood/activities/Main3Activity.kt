@@ -17,7 +17,7 @@ import com.instafood.projectfood.models.SelectIngredient
 import com.instafood.projectfood.models.firebaseConnector
 import kotlinx.android.synthetic.main.activity_main3.*
 import android.R.attr.key
-
+import android.util.Log
 
 
 class Main3Activity : AppCompatActivity() {
@@ -34,6 +34,7 @@ class Main3Activity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(true)
         val fbConnector = firebaseConnector()
+
         fbConnector.getIngredientList {
             val sortedList = it.sortedWith(compareBy({ it.name }))
             creatButtons(sortedList)
@@ -72,9 +73,9 @@ class Main3Activity : AppCompatActivity() {
                     val flex = findViewById(R.id.flex_layout) as FlexboxLayout
                     val btn_D = ToggleButton(this)
                     if(checkedFood.contains(name)){
-                    btn_D.setChecked(false)}
+                    btn_D.setChecked(true)}
                             else{
-                        btn_D.setChecked(true)
+                        btn_D.setChecked(false)
                     }
 
                     //btn_D.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
@@ -98,7 +99,7 @@ class Main3Activity : AppCompatActivity() {
 
     // Checks the button and adds it to the list of checked/clicked buttons.
     private fun isChecked(isChecked: Boolean, pbutton: ToggleButton) {
-        if (!isChecked) {
+        if (isChecked) {
             checkedFood.add(pbutton.text.toString())
             Toast.makeText(this@Main3Activity, checkedFood.size.toString(), Toast.LENGTH_SHORT).show()
 
