@@ -15,7 +15,6 @@ class imageAdapter(private val context: Activity, private val bitMaps: List<Bitm
         val inflater = context.layoutInflater
         val rowView = inflater.inflate(R.layout.imagelayout,null)
         val buttonview = rowView.findViewById<Button>(R.id.button)
-        buttonview.dr
         val imageView = rowView.findViewById<ImageView>(R.id.image_item)
         imageView.setImageBitmap(bitMaps[p0])
         return rowView

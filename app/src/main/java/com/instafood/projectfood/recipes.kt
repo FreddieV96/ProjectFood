@@ -20,7 +20,7 @@ import com.bumptech.glide.Glide
 import com.instafood.projectfood.R.id.image
 import com.instafood.projectfood.adapter.imageAdapter
 
-class Main3Activity : AppCompatActivity() {
+class recipes : AppCompatActivity() {
 
     lateinit var collection : CollectionReference
     lateinit var storage : StorageReference
@@ -63,5 +63,5 @@ class Main3Activity : AppCompatActivity() {
                 })
 
 
-        }
+    }
 }
