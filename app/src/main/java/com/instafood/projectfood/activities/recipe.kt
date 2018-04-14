@@ -27,7 +27,7 @@ class recipe : AppCompatActivity() {
 
         var fbConnecter = firebaseConnector()
         val id = 2
-        fbConnecter.getRecipes({
+        /*fbConnecter.getRecipes({
             var rec = it.get(id)
             titleView.setText(rec.title)
             var number = rec.persons.toString()
@@ -36,7 +36,7 @@ class recipe : AppCompatActivity() {
             stepView.setText(rec.tutorial)
         }, {
             imageView.setImageBitmap(it)
-        }, null)
+        }, null)*/
 
         }
     }

@@ -26,9 +26,13 @@ class recipes : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.recipes)
 
-        val ingredients = intent.getStringArrayListExtra("ingredients").fold(emptyList<SelectIngredient>()) { acc, s ->
+        val s = intent.getStringExtra("1")
+        Toast.makeText(applicationContext, s, Toast.LENGTH_LONG).show()
+        
+
+        /*val ingredients = intent.getStringArrayListExtra("ingredients").fold(emptyList<SelectIngredient>()) { acc, s ->
             acc + SelectIngredient(s)
-        }
+        }*/
 
         val fbConnector = firebaseConnector()
 
@@ -41,6 +45,6 @@ class recipes : AppCompatActivity() {
         fbConnector.getRecipes({}, {
             recipeList.add(it)
             adapter?.notifyDataSetChanged()
-        }, ingredients)
+        }, null)
     }
 }

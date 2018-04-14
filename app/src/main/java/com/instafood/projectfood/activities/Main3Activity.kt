@@ -77,7 +77,7 @@ class Main3Activity : AppCompatActivity() {
         intent.putStringArrayListExtra("ingredients", ArrayList(checkedFood))
         var b = Bundle()
         b.putBoolean("isActive", true)
-        intent.putExtras(b)
+        intent.putExtra("1", "TEST")
         startActivity(intent)
 
 
