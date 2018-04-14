@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.instafood.projectfood.Main3Activity">
+    tools:context="com.instafood.projectfood.activities.Main3Activity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -29,7 +29,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scrollbars="vertical"
-            tools:context=".Main3Activity">
+            tools:context=".activities.Main3Activity">
 
 
             <ScrollView

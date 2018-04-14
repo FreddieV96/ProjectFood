@@ -1,6 +1,5 @@
-package com.instafood.projectfood
+package com.instafood.projectfood.activities
 
-import android.media.Image
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -10,11 +9,8 @@ import android.widget.*
 import com.google.android.flexbox.FlexboxLayout
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.StorageReference
-import com.instafood.projectfood.models.Ingredient
+import com.instafood.projectfood.R
 import kotlinx.android.synthetic.main.activity_main3.*
-import kotlinx.android.synthetic.main.activity_main3.view.*
 
 class Main3Activity : AppCompatActivity() {
 
