@@ -13,6 +13,9 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.instafood.projectfood.R
 import com.instafood.projectfood.models.firebaseConnector
 import kotlinx.android.synthetic.main.activity_main3.*
+import android.R.attr.key
+
+
 
 class Main3Activity : AppCompatActivity() {
 
@@ -73,11 +76,13 @@ class Main3Activity : AppCompatActivity() {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        val intent = Intent(this@Main3Activity,recipes::class.java);
-        intent.putStringArrayListExtra("ingredients", ArrayList(checkedFood))
-        var b = Bundle()
-        b.putBoolean("isActive", true)
-        intent.putExtras(b)
+
+//        val intent = Intent(this@Main3Activity,recipes::class.java);
+//        val extras = intent.extras
+//        extras.putStringArrayList("ingredients", ArrayList(checkedFood))
+
+        val intent = Intent(this, recipes::class.java)
+        intent.putExtra("ing", ArrayList(checkedFood))
         startActivity(intent)
 
 

@@ -38,7 +38,15 @@ class firebaseConnector {
                                 var bitmap = BitmapFactory.decodeFile(localFile.path)
                                 rec.pictureBM = bitmap;
                                 if(onPictureLoad != null) {
-                                    onPictureLoad(rec)
+                                    if(ingList != null) {
+                                        val sIngList = ingList.map { it.name }.toMutableList()
+                                        val sIngredients = rec.ingredients.map { it.title }.toMutableList()
+                                        if(sIngList.containsAll(sIngredients)) {
+                                            onPictureLoad(rec)
+                                        }
+                                    } else {
+                                        onPictureLoad(rec)
+                                    }
                                 }
                             }.addOnFailureListener({
                             })

@@ -15,12 +15,15 @@ class imageAdapter(private val context: Activity, private val recipeList : List<
     override fun getView(id: Int, view: View?, viewgroup: ViewGroup?): View {
         val inflater = context.layoutInflater
         val rowView = inflater.inflate(R.layout.imagelayout, null)
-        val buttonview = rowView.findViewById<Button>(R.id.button)
+        val button = rowView.findViewById<Button>(R.id.button)
         val imageView = rowView.findViewById<ImageView>(R.id.image_item)
         if (recipeList[id].pictureBM != null) {
             imageView.setImageBitmap(recipeList[id].pictureBM)
         }
-        buttonview.setText(recipeList[id].title)
+        button.setOnClickListener {
+            
+        }
+
         return rowView
 
     }
