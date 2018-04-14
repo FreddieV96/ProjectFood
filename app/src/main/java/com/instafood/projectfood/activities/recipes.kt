@@ -10,6 +10,7 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.instafood.projectfood.R
 import com.instafood.projectfood.adapter.imageAdapter
+import com.instafood.projectfood.models.Recipe
 import com.instafood.projectfood.models.SelectIngredient
 import com.instafood.projectfood.models.firebaseConnector
 
