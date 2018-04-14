@@ -15,5 +15,5 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/Easy" />
+        app:srcCompat="@drawable/easy" />
 </android.support.constraint.ConstraintLayout>
