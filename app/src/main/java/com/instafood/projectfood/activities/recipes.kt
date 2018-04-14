@@ -10,6 +10,7 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.instafood.projectfood.R
 import com.instafood.projectfood.adapter.imageAdapter
+import com.instafood.projectfood.models.SelectIngredient
 import com.instafood.projectfood.models.firebaseConnector
 
 class recipes : AppCompatActivity() {
@@ -23,6 +24,10 @@ class recipes : AppCompatActivity() {
         storage = FirebaseStorage.getInstance().getReferenceFromUrl("gs://projectfood-9031e.appspot.com/")
         super.onCreate(savedInstanceState)
         setContentView(R.layout.recipes)
+
+        val ingredients = intent.getStringArrayListExtra("ingredients").fold(emptyList<SelectIngredient>()) { acc, s ->
+            acc + SelectIngredient(s)
+        }
 
         val fbConnector = firebaseConnector()
 
@@ -39,6 +44,6 @@ class recipes : AppCompatActivity() {
         }, {
             imageBitmaps.add(it)
             adapter?.notifyDataSetChanged()
-        }, null)
+        }, ingredients)
     }
 }
