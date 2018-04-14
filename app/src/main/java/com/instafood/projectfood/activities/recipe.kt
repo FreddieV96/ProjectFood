@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.TextView
 import com.instafood.projectfood.R
 import com.instafood.projectfood.models.Ingredient
 import com.instafood.projectfood.models.firebaseConnector
@@ -25,7 +26,7 @@ class recipe : AppCompatActivity() {
         val titleView = findViewById<Button>(R.id.button2)
         val personView = findViewById<Button>(R.id.button4)
         val IngredientView = findViewById<Button>(R.id.button3)
-        val stepView = findViewById<EditText>(R.id.editText2)
+        val stepView = findViewById<TextView>(R.id.textView2)
 
         /*var fbConnecter = firebaseConnector()
         val title = "boller i karry"
