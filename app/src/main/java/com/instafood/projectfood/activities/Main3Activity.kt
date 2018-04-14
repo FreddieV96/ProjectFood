@@ -10,6 +10,7 @@ import com.google.android.flexbox.FlexboxLayout
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.instafood.projectfood.R
+import com.instafood.projectfood.models.firebaseConnector
 import kotlinx.android.synthetic.main.activity_main3.*
 
 class Main3Activity : AppCompatActivity() {
@@ -24,33 +25,27 @@ class Main3Activity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(true)
 
-        collection
-                .get()
-                .addOnCompleteListener({
-                    if (it.isSuccessful) {
-                        for (document in it.result.documents) {
-                            val ing = document.get("name")
-                            if (ing != null) {
-                                //val ll_main = findViewById<LinearLayout>(R.id.ll_main_layout)
-                                val flex = findViewById(R.id.flex_layout) as FlexboxLayout
-                                val btn_D = ToggleButton(this)
-                                btn_D.setChecked(true)
+        val fbConnector = firebaseConnector()
+        fbConnector.getIngredientList {
+            for(ing in it) {
+                val name = ing.name
+                val flex = findViewById(R.id.flex_layout) as FlexboxLayout
+                val btn_D = ToggleButton(this)
+                btn_D.setChecked(true)
 
-                                //btn_D.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
-                                btn_D.layoutParams = FlexboxLayout.LayoutParams(FlexboxLayout.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+                //btn_D.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+                btn_D.layoutParams = FlexboxLayout.LayoutParams(FlexboxLayout.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
 
-                                btn_D.text = ing.toString()
-                                btn_D.textOff = ing.toString()
-                                btn_D.textOn = ing.toString()
-                                btn_D.setOnCheckedChangeListener { _, isChecked -> isChecked(isChecked, btn_D) }
+                btn_D.text = name
+                btn_D.textOff = name
+                btn_D.textOn = name
+                btn_D.setOnCheckedChangeListener { _, isChecked -> isChecked(isChecked, btn_D) }
 
-                                //ll_main.addView(btn_D)
-                                flex.addView(btn_D)
-                            }
+                //ll_main.addView(btn_D)
+                flex.addView(btn_D)
+            }
+        }
 
-                        }
-                    }
-                })
 
     }
 
