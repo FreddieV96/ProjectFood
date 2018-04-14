@@ -63,7 +63,7 @@
         android:layout_margin="0dp"
         android:background="@android:color/holo_green_dark"
         android:shadowRadius="0"
-        android:text="indgidinser"
+        android:text="ingredients"
         android:textColor="@android:color/background_light"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
