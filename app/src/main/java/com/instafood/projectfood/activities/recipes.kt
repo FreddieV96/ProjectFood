@@ -1,4 +1,4 @@
-/*package com.instafood.projectfood.activities
+package com.instafood.projectfood.activities
 
 import android.graphics.Bitmap
 import android.support.v7.app.AppCompatActivity
@@ -41,4 +41,4 @@ class recipes : AppCompatActivity() {
             adapter?.notifyDataSetChanged()
         }, null)
     }
-}*/
+}

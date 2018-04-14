@@ -1,5 +1,6 @@
 package com.instafood.projectfood.activities
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -72,16 +73,23 @@ class Main3Activity : AppCompatActivity() {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        return when (item.itemId) {
-            R.id.action_next -> {
-                var i = 0;
-                for (str in checkedFood) {
-                    Toast.makeText(this@Main3Activity, checkedFood[i], Toast.LENGTH_SHORT).show()
-                    i += 1;
-                }
-                return true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
+        val intent = Intent(this@Main3Activity,recipes::class.java);
+        startActivity(intent)
+
+
+        return true
+//        return when (item.itemId) {
+//            R.id.action_next -> {
+//                var i = 0;
+//                for (str in checkedFood) {
+//                    Toast.makeText(this@Main3Activity, checkedFood[i], Toast.LENGTH_SHORT).show()
+//                    i += 1;
+//                }
+//                return true
+//            }
+//            else -> super.onOptionsItemSelected(item)
+//        }
+
+
     }
 }
