@@ -19,6 +19,9 @@
         <activity
             android:name="com.instafood.projectfood.activities.recipes" >
         </activity>
+        <activity
+            android:name="com.instafood.projectfood.activities.recipe" >
+        </activity>
     </application>
 
 </manifest>

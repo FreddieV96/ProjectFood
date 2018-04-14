@@ -27,7 +27,6 @@ class recipes : AppCompatActivity() {
         setContentView(R.layout.recipes)
 
 
-
         val ingredients = intent.getStringArrayListExtra("ing").fold(emptyList<SelectIngredient>()) { acc, s ->
             acc + SelectIngredient(s)
         }

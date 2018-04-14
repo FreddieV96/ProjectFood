@@ -19,15 +19,17 @@ class recipe : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.recipe)
 
+        //val id = intent.getIntExtra("rec",0)
+
         val imageView = findViewById<ImageView>(R.id.image_item2)
         val titleView = findViewById<Button>(R.id.button2)
         val personView = findViewById<Button>(R.id.button4)
         val IngredientView = findViewById<Button>(R.id.button3)
         val stepView = findViewById<EditText>(R.id.editText2)
 
-        var fbConnecter = firebaseConnector()
+        /*var fbConnecter = firebaseConnector()
         val title = "boller i karry"
-        /*fbConnecter.getRecipes({
+        fbConnecter.getRecipes({
             var rec = it.get(id)
             titleView.setText(rec.title)
             var number = rec.persons.toString()

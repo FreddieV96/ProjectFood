@@ -2,12 +2,16 @@ package com.instafood.projectfood.adapter
 
 import android.view.ViewGroup
 import android.app.Activity
+import android.content.Intent
 import android.graphics.Bitmap
+import android.support.v4.content.ContextCompat.startActivity
 import android.view.View
 import android.widget.BaseAdapter
 import android.widget.Button
 import android.widget.ImageView
 import com.instafood.projectfood.R
+import com.instafood.projectfood.activities.recipe
+import com.instafood.projectfood.activities.recipes
 import com.instafood.projectfood.models.Recipe
 
 class imageAdapter(private val context: Activity, private val recipeList : List<Recipe>)
@@ -21,7 +25,9 @@ class imageAdapter(private val context: Activity, private val recipeList : List<
             imageView.setImageBitmap(recipeList[id].pictureBM)
         }
         button.setOnClickListener {
-            
+            val intent = Intent(this.context, recipe::class.java)
+            intent.putExtra("rec", id)
+            startActivity(this.context, intent,null)
         }
 
         return rowView
