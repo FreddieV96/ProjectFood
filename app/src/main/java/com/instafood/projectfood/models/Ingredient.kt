@@ -34,4 +34,5 @@ data class Ingredient (
     override fun toString(): String {
         return "- $amount $title"
     }
+
 }
