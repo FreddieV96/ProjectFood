@@ -23,11 +23,9 @@ import android.util.Log
 class Main3Activity : AppCompatActivity() {
 
     private val checkedFood = mutableSetOf<String>()
-    lateinit var collection: CollectionReference
     private val queryList = mutableListOf<SelectIngredient>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        collection = FirebaseFirestore.getInstance().collection("ingredients")
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main3)

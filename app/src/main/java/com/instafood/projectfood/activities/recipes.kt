@@ -3,6 +3,7 @@ package com.instafood.projectfood.activities
 import android.graphics.Bitmap
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.*
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
@@ -16,13 +17,8 @@ import com.instafood.projectfood.models.firebaseConnector
 
 class recipes : AppCompatActivity() {
 
-    lateinit var collection : CollectionReference
-    lateinit var storage : StorageReference
-
     override fun onCreate(savedInstanceState: Bundle?) {
 
-        collection = FirebaseFirestore.getInstance().collection("recipes");
-        storage = FirebaseStorage.getInstance().getReferenceFromUrl("gs://projectfood-9031e.appspot.com/")
         super.onCreate(savedInstanceState)
         setContentView(R.layout.recipes)
 
@@ -40,6 +36,7 @@ class recipes : AppCompatActivity() {
         listView.adapter = adapter
 
         fbConnector.getRecipes({
+            Log.d("fb", it.title)
             recipeList.add(it)
             adapter?.notifyDataSetChanged()
         }, ingredients)

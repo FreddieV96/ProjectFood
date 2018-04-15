@@ -1,27 +1,27 @@
 {
   "project_info": {
-    "project_number": "750702038659",
-    "firebase_url": "https://projectfood-9031e.firebaseio.com",
-    "project_id": "projectfood-9031e",
-    "storage_bucket": "projectfood-9031e.appspot.com"
+    "project_number": "65683868329",
+    "firebase_url": "https://projectfood-4a086.firebaseio.com",
+    "project_id": "projectfood-4a086",
+    "storage_bucket": "projectfood-4a086.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:750702038659:android:060cc9296835baea",
+        "mobilesdk_app_id": "1:65683868329:android:060cc9296835baea",
         "android_client_info": {
           "package_name": "com.instafood.projectfood"
         }
       },
       "oauth_client": [
         {
-          "client_id": "750702038659-8abpvvvkkh1rf83m5ageim70pmu768i8.apps.googleusercontent.com",
+          "client_id": "65683868329-0r694oqvm1tcdvv000tn1ekpar665ibk.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDW5ArYTQ9qWaL8KbHIjzJ7-Eq8KSl3PJk"
+          "current_key": "AIzaSyBxlnpW7856-ohObqBTeL6cFfvLq3w35gM"
         }
       ],
       "services": {

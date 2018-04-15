@@ -17,18 +17,13 @@ class firebaseConnector {
     lateinit var store : FirebaseFirestore
     lateinit var storage : StorageReference
 
-    init {
-        store = FirebaseFirestore.getInstance()
-        storage = FirebaseStorage.getInstance().getReferenceFromUrl("gs://projectfood-9031e.appspot.com/")
-    }
-
     /**
      * Get a single recipe from the firestore.
      * @param id The id to get from the firestore.
      * @param callBack The callback function to run once the recipe is loaded.
      */
     fun getRecipe(id: String, callBack : (Recipe) -> Unit) {
-        val document = store.collection("recipes").document(id)
+        val document = FirebaseFirestore.getInstance().collection("recipes").document(id)
         document.get().addOnCompleteListener({
             if(it.isSuccessful) {
                 fromSnapshotToRecipe(it.result, callBack)
@@ -42,7 +37,7 @@ class firebaseConnector {
      * @param onPictureLoad A Lambda function that takes the bitmap when a picture is loaded and handles the bitmap accodringly.
      */
     fun getRecipes(callBack: (Recipe) -> Unit, ingList: List<SelectIngredient> = emptyList()) {
-        val collection = store.collection("recipes")
+        val collection = FirebaseFirestore.getInstance().collection("recipes")
         collection.get().addOnCompleteListener( {
             if(it.isSuccessful) {
                 it.result.documents.forEach({
@@ -77,7 +72,7 @@ class firebaseConnector {
             if(rec != null) {
                 rec.id = it.id
                 if(!rec.picturePath.equals("")) {
-                    val imgRef = storage.child(rec.picturePath)
+                    val imgRef = FirebaseStorage.getInstance().getReferenceFromUrl("gs://projectfood-9031e.appspot.com/").child(rec.picturePath)
                     val localFile = File.createTempFile("images", "jpg")
                     imgRef.getFile(localFile).addOnSuccessListener {
                         var bitmap = BitmapFactory.decodeFile(localFile.path)
@@ -95,7 +90,7 @@ class firebaseConnector {
      * @param callBack A function to handle the list of ingredients returned from firebase.
      */
     fun getIngredientList(callBack: (List<SelectIngredient>) -> Unit) {
-        val collection = store.collection("ingredients")
+        val collection = FirebaseFirestore.getInstance().collection("ingredients")
         collection.get().addOnCompleteListener({
             if(it.isSuccessful) {
                 val ingList = it.result.documents.fold(emptyList<SelectIngredient>()) { acc, i ->
