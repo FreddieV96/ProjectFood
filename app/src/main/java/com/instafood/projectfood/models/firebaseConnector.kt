@@ -72,7 +72,7 @@ class firebaseConnector {
             if(rec != null) {
                 rec.id = it.id
                 if(!rec.picturePath.equals("")) {
-                    val imgRef = FirebaseStorage.getInstance().getReferenceFromUrl("gs://projectfood-9031e.appspot.com/").child(rec.picturePath)
+                    val imgRef = FirebaseStorage.getInstance().getReferenceFromUrl("gs://projectfood-4a086.appspot.com/").child(rec.picturePath)
                     val localFile = File.createTempFile("images", "jpg")
                     imgRef.getFile(localFile).addOnSuccessListener {
                         var bitmap = BitmapFactory.decodeFile(localFile.path)
