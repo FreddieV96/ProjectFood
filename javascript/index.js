@@ -16,6 +16,7 @@ admin.initializeApp({
 var db = admin.firestore();
 
 CSVReader('./lib/opskrifter.csv', (res) => {
+  var ingredients = []
   res = res.filter(rec => rec.id != '')
   res.forEach(rec => {
     var id = rec.id
@@ -33,9 +34,18 @@ CSVReader('./lib/opskrifter.csv', (res) => {
     delete rec.temp
     delete rec.mængde
 
+    rec.ingredients.forEach(i => {
+      if(!ingredients.indexOf(i.title) > -1) {
+        ingredients.push(i.title)
+      }
+    })
+
     delete rec.id
     rec.picturePath = '/picture/' + id + ".jpg"
 
-    db.collection('recipes').doc(id).set(rec)
+    //db.collection('recipes').doc(id).set(rec)
   });
+    for(var i = 1; i < ingredients.length; i++) {
+      db.collection('ingredients').doc(String(i)).set({title:ingredients[i]})
+    }
 })

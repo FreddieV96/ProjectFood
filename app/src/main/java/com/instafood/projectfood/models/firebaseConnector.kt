@@ -90,7 +90,7 @@ class firebaseConnector {
      * Get all ingredients from the ingredients list in firebase.
      * @param callBack A function to handle the list of ingredients returned from firebase.
      */
-    fun getIngredientList(callBack: (List<Ingredient>) -> Unit) {
+    /*fun getIngredientList(callBack: (List<Ingredient>) -> Unit) {
         val collection = FirebaseFirestore.getInstance().collection("recipes")
         collection.get().addOnCompleteListener({
             if(it.isSuccessful) {
@@ -110,7 +110,18 @@ class firebaseConnector {
                 callBack(ingList.toList())
             }
         })
+    }*/
+    fun getIngredientList(callBack: (List<Ingredient>) -> Unit) {
+        val collection = FirebaseFirestore.getInstance().collection("ingredients")
+        collection.get().addOnCompleteListener({
+            if (it.isSuccessful) {
+                val ingList = mutableListOf<Ingredient>()
+                it.result.documents.forEach({
+                    ingList.add(Ingredient(it.get("title").toString(), "0"));
+                })
+                callBack(ingList.toList())
+            }
+        })
     }
-
 
 }

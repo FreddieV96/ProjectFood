@@ -18,6 +18,7 @@ import com.instafood.projectfood.models.firebaseConnector
 import kotlinx.android.synthetic.main.activity_main3.*
 import android.R.attr.key
 import android.util.Log
+import android.view.View
 import com.instafood.projectfood.models.Ingredient
 import java.io.File
 import java.io.FileWriter
@@ -35,25 +36,10 @@ class Main3Activity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(true)
         val fbConnector = firebaseConnector()
-
-        /*val file = File(this.filesDir, "mydir")
-        if(!file.exists()) {
-            file.mkdir()
-        }
-
-        try {
-            val gpxFile = File(file, "myfile")
-            val writer = FileWriter(gpxFile)
-            writer.append("test")
-            writer.flush()
-            writer.close()
-        } catch (e : Exception) {
-            e.printStackTrace();
-        }*/
-
-
+        val spinner = findViewById<ProgressBar>(R.id.loading)
 
         fbConnector.getIngredientList {
+            spinner.visibility = View.GONE
             val sortedList = it.sortedWith(compareBy({ it.title }))
             creatButtons(sortedList)
 
