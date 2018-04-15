@@ -30,4 +30,8 @@ data class Ingredient (
             return arrayOfNulls(size)
         }
     }
+
+    override fun toString(): String {
+        return "- $amount $title"
+    }
 }
