@@ -50,12 +50,13 @@
 
             <Button
                 android:id="@+id/button3"
-                style="?android:attr/borderlessButtonStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="0dp"
                 android:layout_marginTop="4dp"
                 android:background="@android:color/holo_green_dark"
+                android:gravity="left|center_vertical|center_horizontal"
+                android:paddingLeft="10dp"
                 android:shadowRadius="0"
                 android:text="ingredients"
                 android:textColor="@android:color/background_light"
@@ -88,6 +89,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginStart="10dp"
+                android:paddingTop="10dp"
                 android:text="TextView"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
