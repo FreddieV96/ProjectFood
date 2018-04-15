@@ -18,7 +18,10 @@ import com.instafood.projectfood.models.firebaseConnector
 import kotlinx.android.synthetic.main.activity_main3.*
 import android.R.attr.key
 import android.util.Log
+import android.view.View
 import com.instafood.projectfood.models.Ingredient
+import java.io.File
+import java.io.FileWriter
 
 
 class Main3Activity : AppCompatActivity() {
@@ -33,8 +36,10 @@ class Main3Activity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(true)
         val fbConnector = firebaseConnector()
+        val spinner = findViewById<ProgressBar>(R.id.loading)
 
         fbConnector.getIngredientList {
+            spinner.visibility = View.GONE
             val sortedList = it.sortedWith(compareBy({ it.title }))
             creatButtons(sortedList)
 

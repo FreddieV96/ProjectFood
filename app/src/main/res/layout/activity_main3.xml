@@ -53,7 +53,11 @@
                     app:alignContent="stretch"
                     app:alignItems="stretch"
                     app:flexWrap="wrap">
-
+                    <ProgressBar
+                        android:id="@+id/loading"
+                        style="?android:attr/progressBarStyleLarge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
 
                 </com.google.android.flexbox.FlexboxLayout>
             </ScrollView>

@@ -2,6 +2,7 @@ package com.instafood.projectfood.models
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.net.Uri
 import android.util.Log
 import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.CollectionReference
@@ -22,11 +23,11 @@ class firebaseConnector {
      * @param id The id to get from the firestore.
      * @param callBack The callback function to run once the recipe is loaded.
      */
-    fun getRecipe(id: String, callBack : (Recipe) -> Unit) {
+    fun getRecipe(id: String, callBack : (Recipe) -> Unit, getImages: Boolean) {
         val document = FirebaseFirestore.getInstance().collection("recipes").document(id)
         document.get().addOnCompleteListener({
             if(it.isSuccessful) {
-                fromSnapshotToRecipe(it.result, callBack)
+                fromSnapshotToRecipe(it.result, callBack, getImages)
             }
         })
     }
@@ -36,7 +37,7 @@ class firebaseConnector {
      * @param callBack A Lambda function that takes a list of recipes and does something with it.
      * @param onPictureLoad A Lambda function that takes the bitmap when a picture is loaded and handles the bitmap accodringly.
      */
-    fun getRecipes(callBack: (Recipe) -> Unit, ingList: List<Ingredient> = emptyList()) {
+    fun getRecipes(callBack: (Recipe) -> Unit, ingList: List<Ingredient> = emptyList(), getImages: Boolean) {
         val collection = FirebaseFirestore.getInstance().collection("recipes")
         collection.get().addOnCompleteListener( {
             if(it.isSuccessful) {
@@ -55,7 +56,7 @@ class firebaseConnector {
                             }
                         }
                     } else {
-                        fromSnapshotToRecipe(it, callBack)
+                        fromSnapshotToRecipe(it, callBack, getImages)
                     }
                 })
             }
@@ -67,11 +68,11 @@ class firebaseConnector {
      * @param it The snapshot to convert from.
      * @param callBack The callback to run on the recipe.
      */
-    fun fromSnapshotToRecipe(it: DocumentSnapshot, callBack : (Recipe) -> Unit) {
+    fun fromSnapshotToRecipe(it: DocumentSnapshot, callBack : (Recipe) -> Unit, getImages : Boolean) {
             val rec = it.toObject(Recipe::class.java)
             if(rec != null) {
                 rec.id = it.id
-                if(!rec.picturePath.equals("")) {
+                if(!rec.picturePath.equals("") && getImages) {
                     val imgRef = FirebaseStorage.getInstance().getReferenceFromUrl("gs://projectfood-4a086.appspot.com/").child(rec.picturePath)
                     val localFile = File.createTempFile("images", "jpg")
                     imgRef.getFile(localFile).addOnSuccessListener {
@@ -89,7 +90,7 @@ class firebaseConnector {
      * Get all ingredients from the ingredients list in firebase.
      * @param callBack A function to handle the list of ingredients returned from firebase.
      */
-    fun getIngredientList(callBack: (List<Ingredient>) -> Unit) {
+    /*fun getIngredientList(callBack: (List<Ingredient>) -> Unit) {
         val collection = FirebaseFirestore.getInstance().collection("recipes")
         collection.get().addOnCompleteListener({
             if(it.isSuccessful) {
@@ -105,6 +106,18 @@ class firebaseConnector {
                             }
                         })
                     }
+                })
+                callBack(ingList.toList())
+            }
+        })
+    }*/
+    fun getIngredientList(callBack: (List<Ingredient>) -> Unit) {
+        val collection = FirebaseFirestore.getInstance().collection("ingredients")
+        collection.get().addOnCompleteListener({
+            if (it.isSuccessful) {
+                val ingList = mutableListOf<Ingredient>()
+                it.result.documents.forEach({
+                    ingList.add(Ingredient(it.get("title").toString(), "0"));
                 })
                 callBack(ingList.toList())
             }

@@ -34,6 +34,6 @@ class recipe : AppCompatActivity() {
             IngredientView.setText(it.ingredients.fold(""){ acc, i -> acc + i + "\n"})
             stepView.setText(it.tutorial)
             imageView.setImageBitmap(it.pictureBM)
-        })
+        }, true)
         }
     }
