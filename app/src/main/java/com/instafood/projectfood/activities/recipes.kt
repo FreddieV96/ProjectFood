@@ -4,6 +4,7 @@ import android.graphics.Bitmap
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.*
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
@@ -36,9 +37,11 @@ class recipes : AppCompatActivity() {
 
         val listView = findViewById<ListView>(R.id.listview1)
         val adapter = imageAdapter(this, recipeList)
+        val progressBar = findViewById<ProgressBar>(R.id.loading)
         listView.adapter = adapter
 
         fbConnector.getRecipes({
+            progressBar.visibility = View.GONE
             Log.d("fb", it.title)
             recipeList.add(it)
             adapter?.notifyDataSetChanged()

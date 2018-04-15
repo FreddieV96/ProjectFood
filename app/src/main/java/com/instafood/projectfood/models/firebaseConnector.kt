@@ -52,7 +52,7 @@ class firebaseConnector {
                                 acc + e.title
                             }
                             if(ssIngredients.containsAll(sIngredients)) {
-                                fromSnapshotToRecipe(it, callBack)
+                                fromSnapshotToRecipe(it, callBack, getImages)
                             }
                         }
                     } else {
