@@ -11,6 +11,7 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.instafood.projectfood.R
 import com.instafood.projectfood.adapter.imageAdapter
+import com.instafood.projectfood.models.Ingredient
 import com.instafood.projectfood.models.Recipe
 import com.instafood.projectfood.models.SelectIngredient
 import com.instafood.projectfood.models.firebaseConnector
@@ -23,8 +24,8 @@ class recipes : AppCompatActivity() {
         setContentView(R.layout.recipes)
 
 
-        val ingredients = intent.getStringArrayListExtra("ing").fold(emptyList<SelectIngredient>()) { acc, s ->
-            acc + SelectIngredient(s)
+        val ingredients = intent.getStringArrayListExtra("ing").fold(emptyList<Ingredient>()) { acc, s ->
+            acc + Ingredient(s, "0")
         }
 
         val fbConnector = firebaseConnector()

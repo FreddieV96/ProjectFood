@@ -36,7 +36,7 @@ class firebaseConnector {
      * @param callBack A Lambda function that takes a list of recipes and does something with it.
      * @param onPictureLoad A Lambda function that takes the bitmap when a picture is loaded and handles the bitmap accodringly.
      */
-    fun getRecipes(callBack: (Recipe) -> Unit, ingList: List<SelectIngredient> = emptyList()) {
+    fun getRecipes(callBack: (Recipe) -> Unit, ingList: List<Ingredient> = emptyList()) {
         val collection = FirebaseFirestore.getInstance().collection("recipes")
         collection.get().addOnCompleteListener( {
             if(it.isSuccessful) {
@@ -48,7 +48,7 @@ class firebaseConnector {
                                 acc + e.title
                             }
                             val ssIngredients = ingList.fold(emptyList<String>()) { acc,e ->
-                                acc + e.name
+                                acc + e.title
                             }
                             if(sIngredients.containsAll(ssIngredients)) {
                                 fromSnapshotToRecipe(it, callBack)
