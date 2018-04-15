@@ -18,12 +18,13 @@ import com.instafood.projectfood.models.firebaseConnector
 import kotlinx.android.synthetic.main.activity_main3.*
 import android.R.attr.key
 import android.util.Log
+import com.instafood.projectfood.models.Ingredient
 
 
 class Main3Activity : AppCompatActivity() {
 
     private val checkedFood = mutableSetOf<String>()
-    private val queryList = mutableListOf<SelectIngredient>()
+    private val queryList = mutableListOf<Ingredient>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -34,7 +35,7 @@ class Main3Activity : AppCompatActivity() {
         val fbConnector = firebaseConnector()
 
         fbConnector.getIngredientList {
-            val sortedList = it.sortedWith(compareBy({ it.name }))
+            val sortedList = it.sortedWith(compareBy({ it.title }))
             creatButtons(sortedList)
 
             val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
@@ -49,13 +50,13 @@ class Main3Activity : AppCompatActivity() {
 
                 override fun onQueryTextChange(newText: String): Boolean {
                     for (ing in it) {
-                        if (ing.name.contains(newText))
+                        if (ing.title.contains(newText))
                             queryList.add(ing)
                     }
                     if (queryList.size > 0) {
                         resetView()
                     }
-                    val sortedList = queryList.sortedWith(compareBy({ it.name }))
+                    val sortedList = queryList.sortedWith(compareBy({ it.title }))
                     creatButtons(sortedList)
 
                     queryList.removeAll(it)
@@ -65,9 +66,9 @@ class Main3Activity : AppCompatActivity() {
         }
     }
 
-    private fun creatButtons(it: List<SelectIngredient>) {
+    private fun creatButtons(it: List<Ingredient>) {
         for (ing in it) {
-                    val name = ing.name
+                    val name = ing.title
                     val flex = findViewById(R.id.flex_layout) as FlexboxLayout
                     val btn_D = ToggleButton(this)
                     if(checkedFood.contains(name)){
