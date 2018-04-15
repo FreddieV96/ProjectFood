@@ -1,3 +1,8 @@
+/**
+ * This entire script is for adding data to the firestore
+ */
+
+
 var admin = require('firebase-admin');
 var CSVReader = require('./lib/CSVToJSON')
 
@@ -9,8 +14,6 @@ admin.initializeApp({
 });
 
 var db = admin.firestore();
-
-//db.collection('recipes').doc('1').set({test: "test"})
 
 CSVReader('./lib/opskrifter.csv', (res) => {
   res = res.filter(rec => rec.id != '')
@@ -32,8 +35,6 @@ CSVReader('./lib/opskrifter.csv', (res) => {
 
     delete rec.id
     rec.picturePath = '/picture/' + id + ".jpg"
-
-    //console.log(rec)
 
     db.collection('recipes').doc(id).set(rec)
   });
