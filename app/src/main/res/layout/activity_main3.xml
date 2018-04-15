@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:background="@android:color/holo_blue_dark"
             android:elevation="4dp"
-            android:theme="@style/AuHackTheme" />
+            android:theme="@style/PopupOverlay" />
 
         <SearchView
             android:id="@+id/searchView"
@@ -42,7 +42,7 @@
             <ScrollView
                 android:id="@+id/sw_layout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="0dp"
                 tools:layout_editor_absoluteX="149dp">
 
                 <com.google.android.flexbox.FlexboxLayout xmlns:android="http://schemas.android.com/apk/res/android"
