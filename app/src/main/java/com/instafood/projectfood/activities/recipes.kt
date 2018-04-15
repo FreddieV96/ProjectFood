@@ -15,6 +15,9 @@ import com.instafood.projectfood.models.Ingredient
 import com.instafood.projectfood.models.Recipe
 import com.instafood.projectfood.models.SelectIngredient
 import com.instafood.projectfood.models.firebaseConnector
+import java.io.BufferedReader
+import java.io.File
+import java.io.FileReader
 
 class recipes : AppCompatActivity() {
 
@@ -22,7 +25,6 @@ class recipes : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.recipes)
-
 
         val ingredients = intent.getStringArrayListExtra("ing").fold(emptyList<Ingredient>()) { acc, s ->
             acc + Ingredient(s, "0")
@@ -40,7 +42,7 @@ class recipes : AppCompatActivity() {
             Log.d("fb", it.title)
             recipeList.add(it)
             adapter?.notifyDataSetChanged()
-        }, ingredients)
+        }, ingredients, true)
 
     }
 }
