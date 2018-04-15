@@ -51,8 +51,8 @@ class firebaseConnector {
                             val ssIngredients = ingList.fold(emptyList<String>()) { acc,e ->
                                 acc + e.title
                             }
-                            if(sIngredients.containsAll(ssIngredients)) {
-                                fromSnapshotToRecipe(it, callBack, getImages)
+                            if(ssIngredients.containsAll(sIngredients)) {
+                                fromSnapshotToRecipe(it, callBack)
                             }
                         }
                     } else {
